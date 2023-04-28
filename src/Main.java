@@ -1,9 +1,5 @@
 
-import java.net.SocketException;
-import java.net.UnknownHostException;
-
 import chat.Cliente;
-import chat.Network;
 import chat.Servidor;
 
 public class Main {
@@ -15,10 +11,10 @@ public class Main {
 
         Cliente cliente = new Cliente();
 
-        
-
         Thread s = new Thread(servidor);
         Thread c = new Thread(cliente);
+        s.start();
+        c.start();
         
 
     }

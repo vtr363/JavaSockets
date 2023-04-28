@@ -9,42 +9,37 @@ import java.util.Scanner;
 
 public class Servidor implements Runnable {
 
-    private String ip;
-    private int porta = 10000;
+    private static String ip;
+    private static int porta = 10000;
 
-    
     public Servidor(){
         try {
-            this.ip = Network.getIpAddress();
-        } catch (SocketException | UnknownHostException e) {
+            Servidor.ip = Conexao.getIpAddress();
+        } catch (UnknownHostException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SocketException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
-    
 
     public String getIp() {
+        
         return ip;
     }
     
-    public void setIp(String ip) {
-        this.ip = ip;
+    public String getPorta() {
+        return null;
     }
-    
-    public int getPorta() {
-        return porta;
-    }
-
-    public void setPorta(int porta) {
-        this.porta = porta;
-    }
-
 
     public void run() {
-        try (ServerSocket server = new ServerSocket(this.porta)) {
+
+        try (ServerSocket server = new ServerSocket(Servidor.porta)) {
             System.out.println("Porta 10000 aberta, aguardando conexão");
             Socket client = server.accept();
-            
+            Cliente.setIp(client.getInetAddress().getHostAddress());
+
             System.out.println("Conexão do cliente "+client.getInetAddress().getHostAddress());
 
             Scanner s = new Scanner(client.getInputStream());
@@ -55,10 +50,10 @@ public class Servidor implements Runnable {
             s.close();
             client.close();
             server.close();
-
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
+
 }
