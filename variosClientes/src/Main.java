@@ -32,8 +32,9 @@ public class Main {
                     break;
                 case "2":
                     System.out.println("Digite o ip do servidor");
-                    resp = scanner.nextLine();
-                    scanner.close();
+                    String ip = scanner.nextLine();
+                    Cliente.setIp(ip);
+    
                     c.start();
                     
                     

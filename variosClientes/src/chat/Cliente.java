@@ -21,6 +21,7 @@ public class Cliente implements Runnable {
         try (Socket cliente = new Socket(Cliente.ip, 10000)) {
             System.out.println("Conectado ao servidor!" + Cliente.ip);
 
+            new Thread(msg(cliente)).start();
             Scanner s = new Scanner(System.in);
             PrintStream out = new PrintStream(cliente.getOutputStream());
 
