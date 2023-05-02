@@ -37,4 +37,16 @@ public class Cliente implements Runnable {
         }
 
     }
+
+    public Runnable msg(Socket cliente){
+        try (Scanner s = new Scanner(cliente.getInputStream())) {
+            while(s.hasNextLine()) {
+                System.out.println(s.nextLine());
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+            return null;
+    }
 }
