@@ -21,7 +21,11 @@ public class Cliente implements Runnable{
 
             out = new PrintStream(cliente.getOutputStream());
 
-            
+            Scanner s = new Scanner(System.in);
+            while(s.hasNextLine()){
+                out.println(s.nextLine());
+            }
+            s.close();
 
             
             cliente.close();

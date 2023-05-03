@@ -4,15 +4,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
+import javax.swing.ScrollPaneConstants;
 
 import chat.Cliente;
 import chat.Servidor;
@@ -79,13 +80,15 @@ public class TelaChat {
 		textArea.setBounds(25, 10, 207, 186);
 		panel.add(textArea);
 
-		
-
+		JScrollPane scroll = new JScrollPane ( textArea );
+    	scroll.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
+		frame.add(scroll);
 
 		JButton btnNewButton = new JButton("Enviar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Cliente.sendMsg(textField.getText());
+				textField.setText("");
 			}
 		});
 
