@@ -2,8 +2,6 @@ package telas;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.JButton;

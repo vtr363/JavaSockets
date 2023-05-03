@@ -6,6 +6,13 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class Cliente implements Runnable{
+
+    public String ip;
+
+    public Cliente(String ip) {
+        this.ip = ip;
+    }
+
     public void run(){
         try (Socket cliente = new Socket("10.136.64.9", 10000)) {
             System.out.println("Cliente conectado ao servidor!");
