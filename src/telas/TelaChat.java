@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
@@ -14,6 +16,7 @@ import javax.swing.JTextPane;
 
 import chat.Cliente;
 import chat.Servidor;
+import chat.msgHandler;
 
 public class TelaChat {
 
@@ -53,6 +56,7 @@ public class TelaChat {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+
 		frame = new JFrame();
 		frame.setBounds(100, 100, 406, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,13 +66,6 @@ public class TelaChat {
 		frame.getContentPane().add(panel, "name_471927241687600");
 		panel.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Enviar");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton.setBounds(171, 207, 61, 19);
-		panel.add(btnNewButton);
 		
 		textField = new JTextField();
 		textField.setBounds(25, 207, 136, 19);
@@ -76,10 +73,23 @@ public class TelaChat {
 		textField.setColumns(10);
 		
 		JTextArea textArea = new JTextArea();
+		PrintStream printStream = new PrintStream(new msgHandler(textArea));
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
 		textArea.setBounds(25, 10, 207, 186);
 		panel.add(textArea);
+
+		
+
+
+		JButton btnNewButton = new JButton("Enviar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Cliente.sendMsg(textField.getText());
+			}
+		});
+		btnNewButton.setBounds(171, 207, 61, 19);
+		panel.add(btnNewButton);
 		
 		txtIpDoServidor = new JTextField();
 		txtIpDoServidor.setToolTipText("IP do outro computador");

@@ -8,31 +8,35 @@ import java.util.Scanner;
 public class Cliente implements Runnable{
 
     public String ip;
+    private static PrintStream out;
+    
 
     public Cliente(String ip) {
         this.ip = ip;
     }
 
     public void run(){
-        try (Socket cliente = new Socket("10.136.64.9", 10000)) {
+        try (Socket cliente = new Socket(this.ip, 10000)) {
             System.out.println("Cliente conectado ao servidor!");
 
-            Scanner s = new Scanner(System.in);
-            PrintStream out = new PrintStream(cliente.getOutputStream());
+            out = new PrintStream(cliente.getOutputStream());
 
             
-            
-            while(s.hasNextLine()) {
-                out.println(s.nextLine());
-            }
 
-            out.close();
-            s.close();
+            
             cliente.close();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
+    }
+
+    public static void sendMsg(String msg){
+        Scanner s = new Scanner(msg);
+        while(s.hasNextLine()){
+            out.println(s.nextLine());
+        }
+        s.close();
     }
 }
