@@ -81,8 +81,9 @@ public class TelaChat {
 		panel.add(textArea);
 
 		JScrollPane scroll = new JScrollPane ( textArea );
+		scroll.setBounds(10, 10,144,155);
     	scroll.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
-		frame.add(scroll);
+		panel.add(scroll);
 
 		JButton btnNewButton = new JButton("Enviar");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -92,7 +93,6 @@ public class TelaChat {
 			}
 		});
 
-		System.setErr(printStream);
 		System.setOut(printStream);
 		btnNewButton.setBounds(171, 207, 61, 19);
 		panel.add(btnNewButton);
