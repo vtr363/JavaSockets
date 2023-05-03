@@ -88,6 +88,9 @@ public class TelaChat {
 				Cliente.sendMsg(textField.getText());
 			}
 		});
+
+		System.setErr(printStream);
+		System.setOut(printStream);
 		btnNewButton.setBounds(171, 207, 61, 19);
 		panel.add(btnNewButton);
 		
