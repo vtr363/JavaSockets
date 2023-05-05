@@ -1,6 +1,8 @@
 package chat;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Scanner;
@@ -9,6 +11,8 @@ public class Cliente implements Runnable{
 
     public String ip;
     private static PrintStream out;
+    private static OutputStreamWriter ouw = new OutputStreamWriter(out);
+    private static BufferedWriter bfw = new BufferedWriter(ouw);
     
 
     public Cliente(String ip) {
@@ -36,11 +40,15 @@ public class Cliente implements Runnable{
 
     }
 
-    public static void sendMsg(String msg){
-        Scanner s = new Scanner(msg);
-        while(s.hasNextLine()){
-            out.println(s.nextLine());
-        }
-        s.close();
+    public static void sendMsg(String msg) throws IOException{
+        // Scanner s = new Scanner(msg);
+        // while(s.hasNextLine()){
+        //     out.println(s.nextLine());
+        // }
+        // s.close();
+        
+        System.out.println(msg);
+        bfw.write(msg+"\r\n");
+        bfw.flush();
     }
 }

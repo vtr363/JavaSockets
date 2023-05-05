@@ -8,6 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
@@ -81,18 +82,23 @@ public class TelaChat {
 		panel.add(textArea);
 
 		JScrollPane scroll = new JScrollPane ( textArea );
-		scroll.setBounds(10, 10,144,155);
+		scroll.setBounds(25, 10, 207, 186);
     	scroll.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
 		panel.add(scroll);
 
 		JButton btnNewButton = new JButton("Enviar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Cliente.sendMsg(textField.getText());
+				try {
+					Cliente.sendMsg(textField.getText());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				textField.setText("");
 			}
 		});
-
+		
 		System.setOut(printStream);
 		btnNewButton.setBounds(171, 207, 61, 19);
 		panel.add(btnNewButton);
