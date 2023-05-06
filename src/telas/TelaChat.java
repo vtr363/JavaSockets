@@ -53,7 +53,7 @@ public class TelaChat {
 	public TelaChat() {
 		initialize();
 	}
-
+	Cliente cliente;
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -90,7 +90,7 @@ public class TelaChat {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Cliente.sendMsg(textField.getText());
+					cliente.sendMsg(textField.getText());
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -98,7 +98,7 @@ public class TelaChat {
 				textField.setText("");
 			}
 		});
-		
+		System.setErr(printStream);
 		System.setOut(printStream);
 		btnNewButton.setBounds(171, 207, 61, 19);
 		panel.add(btnNewButton);
@@ -128,7 +128,7 @@ public class TelaChat {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Cliente cliente = new Cliente(txtIpDoServidor.getText());
+				cliente = new Cliente(txtIpDoServidor.getText());
                 Thread c = new Thread(cliente);
                 c.start();
 				
